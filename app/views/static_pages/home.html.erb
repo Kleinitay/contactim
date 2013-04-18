@@ -1,0 +1,9 @@
+
+    <div class="center hero-unit">
+        <h1>Welcome to Contactim</h1>
+        <%= link_to "Sign up now!", new_user_session_path,
+                    class: "btn btn-large btn-primary" %>
+        <div> Or</div>
+        <%= link_to "Login with facebook", user_omniauth_authorize_path(:facebook), class: "btn btn-large btn-primary" %>
+    </div>
+
