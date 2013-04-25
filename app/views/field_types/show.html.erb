@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @field_type.Name %>
+</p>
+
+<p>
+  <b>Defaultval:</b>
+  <%= @field_type.defaultVal %>
+</p>
+
+<p>
+  <b>Validation:</b>
+  <%= @field_type.validation %>
+</p>
+
+<p>
+  <b>Min length:</b>
+  <%= @field_type.min_length %>
+</p>
+
+<p>
+  <b>Max length:</b>
+  <%= @field_type.max_length %>
+</p>
+
+<p>
+  <b>User generated:</b>
+  <%= @field_type.user_generated %>
+</p>
+
+
+<%= link_to 'Edit', edit_field_type_path(@field_type) %> |
+<%= link_to 'Back', field_types_path %>

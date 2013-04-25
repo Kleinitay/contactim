@@ -22,5 +22,9 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before { @user = FactoryGirl.new(:user) }
+  subject (@user)
+
+  it {should respond_to('email')}
+
 end

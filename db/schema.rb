@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418120942) do
+ActiveRecord::Schema.define(:version => 20130421062713) do
+
+  create_table "field_types", :force => true do |t|
+    t.string   "Name"
+    t.string   "defaultVal"
+    t.string   "validation"
+    t.integer  "min_length"
+    t.integer  "max_length"
+    t.boolean  "user_generated"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

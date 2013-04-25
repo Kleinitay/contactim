@@ -1,0 +1,33 @@
+<h1>Listing field_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Defaultval</th>
+    <th>Validation</th>
+    <th>Min length</th>
+    <th>Max length</th>
+    <th>User generated</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @field_types.each do |field_type| %>
+  <tr>
+    <td><%= field_type.Name %></td>
+    <td><%= field_type.defaultVal %></td>
+    <td><%= field_type.validation %></td>
+    <td><%= field_type.min_length %></td>
+    <td><%= field_type.max_length %></td>
+    <td><%= field_type.user_generated %></td>
+    <td><%= link_to 'Show', field_type %></td>
+    <td><%= link_to 'Edit', edit_field_type_path(field_type) %></td>
+    <td><%= link_to 'Destroy', field_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Field type', new_field_type_path %>
