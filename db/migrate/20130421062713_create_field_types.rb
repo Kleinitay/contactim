@@ -7,6 +7,7 @@ class CreateFieldTypes < ActiveRecord::Migration
       t.integer :min_length
       t.integer :max_length
       t.boolean :user_generated
+      t.integer :user_id
 
       t.timestamps
     end
