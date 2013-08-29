@@ -14,6 +14,7 @@ class SheetsController < ApplicationController
   # GET /sheets/1.json
   def show
     @sheet = Sheet.find(params[:id])
+    @sheet_records = @sheet.sheet_records
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +26,7 @@ class SheetsController < ApplicationController
   # GET /sheets/new.json
   def new
     @sheet = Sheet.new
-
+    @basic_field_types = FieldType.basic_fields
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sheet }
@@ -41,7 +42,10 @@ class SheetsController < ApplicationController
   # POST /sheets.json
   def create
     @sheet = Sheet.new(params[:sheet])
-
+    field_types = params[:fields]
+    field_types.each do |field_id|
+      @sheet.field_types.create(field_type_id: field_id)
+    end
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -80,4 +84,30 @@ class SheetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def new_record
+    @sheet = Sheet.find(params[:sheet_id])
+    @sheet_records = sheet.field_types
+  end
+
+  def add_record
+    @sheet = Sheet.find(params[:sheet_id])
+    @errors = @sheet.add_record(params[:record], current_user)
+    if @errors.size <= 0
+      redirect_to @sheet, notice: 'record added'
+    else
+      redirect_to new_record
+    end 
+  end
+
+  def delete_record
+    sheet = Sheet.find(params[:id])
+    record = SheetRecord.find(params[:record_id])
+    if record.user_id == current_user.id || sheet.user_id == current_user.id
+      record.destroy
+    else
+      #show error message
+    end
+  end
+
 end
