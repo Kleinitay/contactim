@@ -1,7 +1,7 @@
 class CreateFieldTypes < ActiveRecord::Migration
   def change
     create_table :field_types do |t|
-      t.string :Name
+      t.string :name
       t.string :defaultVal
       t.string :validation
       t.integer :min_length

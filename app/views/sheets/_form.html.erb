@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.hidden_field :user_id %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -31,7 +31,14 @@
     <%= f.label :visibility %><br />
     <%= f.number_field :visibility %>
   </div>
+
+  <h2>Fields</h2>
+  <% @basic_field_types.each do |field| %>
+    <%= check_box_tag, id: field_cb, value: field.id %> <%= field.name %>  
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+
 <% end %>
