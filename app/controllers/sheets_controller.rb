@@ -87,7 +87,11 @@ class SheetsController < ApplicationController
 
   def new_record
     @sheet = Sheet.find(params[:sheet_id])
-    @record_fields = sheet.field_types
+    fields_types = sheet.field_types
+    @record = @sheet.sheet_records.build
+    @field_types.each do |field|
+      @record.record_fields.build(field_type_id: field.id)
+    end
   end
 
   def add_record

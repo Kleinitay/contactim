@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
-  <%= @sheet.user_id %>
-</p>
-
-<p>
   <b>Name:</b>
   <%= @sheet.name %>
 </p>
@@ -16,15 +11,19 @@
 </p>
 
 <p>
-  <b>Closed:</b>
-  <%= @sheet.closed %>
-</p>
-
-<p>
   <b>Visibility:</b>
   <%= @sheet.visibility %>
 </p>
+<table>
+  <% @sheet.sheet_records.each do |record| %>
+    <tr>
+      <% record.record_fields.each do |field| %>
+        <td><%= field.data %> </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
 
-<%= link_to 'Edit', edit_sheet_path(@sheet) %> |
+<%= link_to 'Edit', edit_sheet_path(@sheet) if @sheet.user_id == current_user.id %> |
 <%= link_to 'Back', sheets_path %>
