@@ -11,18 +11,65 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421062713) do
+ActiveRecord::Schema.define(:version => 20130425072404) do
 
   create_table "field_types", :force => true do |t|
-    t.string   "Name"
+    t.string   "name"
     t.string   "defaultVal"
     t.string   "validation"
     t.integer  "min_length"
     t.integer  "max_length"
     t.boolean  "user_generated"
+    t.integer  "user_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  create_table "record_fields", :force => true do |t|
+    t.integer  "record_id"
+    t.integer  "field_type_id"
+    t.string   "data"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "sheet_field_types", :force => true do |t|
+    t.integer  "sheet_id"
+    t.integer  "field_type_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "sheet_field_types", ["sheet_id", "field_type_id"], :name => "index_sheet_field_types_on_sheet_id_and_field_type_id", :unique => true
+
+  create_table "sheet_records", :force => true do |t|
+    t.integer  "sheet_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sheet_records", ["sheet_id"], :name => "index_sheet_records_on_sheet_id"
+
+  create_table "sheets", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "closed"
+    t.integer  "visibility"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_fields", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "field_type_id"
+    t.string   "data"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "user_fields", ["user_id", "field_type_id"], :name => "index_user_fields_on_user_id_and_field_type_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

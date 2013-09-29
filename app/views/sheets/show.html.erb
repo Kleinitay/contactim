@@ -24,6 +24,6 @@
   <% end %>
 </table>
 
-
+<%= link_to 'Add Record', new_record_path(@sheet) if @sheet.user_id == current_user.id || @sheet.visibility = 0 %>
 <%= link_to 'Edit', edit_sheet_path(@sheet) if @sheet.user_id == current_user.id %> |
 <%= link_to 'Back', sheets_path %>

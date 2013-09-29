@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid
 
   has_many :sheet_records
+  has_many :sheets
   has_many :user_fields
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

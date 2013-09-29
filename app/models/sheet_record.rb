@@ -3,4 +3,5 @@ class SheetRecord < ActiveRecord::Base
   belongs_to :sheet
   belongs_to :user
   has_many :record_fields
+  accept_nested_attributes_for :record_fields
 end

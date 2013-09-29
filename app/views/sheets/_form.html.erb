@@ -12,7 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
     <%= f.hidden_field :user_id %>
   </div>
   <div class="field">
@@ -24,20 +23,23 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :closed %><br />
-    <%= f.check_box :closed %>
+    <%= f.check_box :closed %>  Closed for editing
   </div>
   <div class="field">
-    <%= f.label :visibility %><br />
-    <%= f.number_field :visibility %>
+    Contact sheet privacy level: <%= f.number_field :visibility %>
   </div>
 
   <h2>Fields</h2>
-  <% @basic_field_types.each do |field| %>
-    <%= check_box_tag, id: field_cb, value: field.id %> <%= field.name %>  
+  <% @basic_field_types.each_with_index do |field, i| %>
+    <%= "<br />".html_safe if i % 8 == 0 %>
+
+    <%= check_box_tag "basic_fields[#{field.id}]", "#{field.id}" %> <%= field.name %>
+
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+    <br/>
+    <br />
+  <div class="center">
+    <%= f.submit 'Update contact sheet', class: 'btn btn-large btn-primary' %>
   </div>
 
 

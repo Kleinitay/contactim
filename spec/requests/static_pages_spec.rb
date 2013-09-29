@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'utilities'
+#require 'utilities'
 
 describe "StaticPages" do
   subject { page }
