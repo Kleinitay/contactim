@@ -2,7 +2,7 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
-    @sheets = Sheet.all
+    @sheets = current_user.sheets
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,12 +42,14 @@ class SheetsController < ApplicationController
   # POST /sheets.json
   def create
     @sheet = Sheet.new(params[:sheet])
-    field_types = params[:fields]
-    field_types.each do |field_id|
-      @sheet.field_types.create(field_type_id: field_id)
-    end
+    field_types = params[:basic_fields]
+    
     respond_to do |format|
       if @sheet.save
+        field_types.each do |field_id|
+          ft = FieldType.find(field_id.first.to_i)
+          @sheet.field_types << ft
+        end
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
         format.json { render json: @sheet, status: :created, location: @sheet }
       else

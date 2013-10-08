@@ -1,13 +1,16 @@
 class Sheet < ActiveRecord::Base
   attr_accessible :closed, :description, :name, :user_id, :visibility
-  has_many :sheet_records
-  has_any_and_belongs_to_many :field_types
+  has_many :sheet_records, :dependant => :destroy
+  belongs_to :user
+  has_many :sheet_field_types, :dependant => :destroy
+  has_many :field_types, :through => :sheet_field_types
+  accepts_nested_attributes_for :sheet_records
 
   def add_record(record_hash, adding_user)
   	return ['Sheet closed'] if closed
   	errors = fields_validated?(record_hash)
   	return errors if errors.length > 0
-  	adding_user_id = adding_user.present? adding_user.id : -1
+  	adding_user_id = adding_user.present? ? adding_user.id : -1
   	record = self.sheet_records.create(user_id: added_by_user_id)
   	user_fields = []
   	if adding_user.present?
