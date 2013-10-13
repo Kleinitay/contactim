@@ -14,13 +14,12 @@
 ActiveRecord::Schema.define(:version => 20130425072404) do
 
   create_table "field_types", :force => true do |t|
-    t.string   "name"
+    t.string   "Name"
     t.string   "defaultVal"
     t.string   "validation"
     t.integer  "min_length"
     t.integer  "max_length"
     t.boolean  "user_generated"
-    t.integer  "user_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
